@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://use.typekit.net/gzq1eux.css">
+	<title>oceanplayer</title>
+	<style>
+		body{margin: 0; height: 100vh; overflow: hidden; background: black; user-select: none;}
+		h1 {z-index: 100; color: #F1FF30; text-align: center; font-size: 6rem;
+			text-shadow:0px 0px 10px rgba(241, 255, 48, 0.9),
+            0px 0px 30px rgba(241, 255, 48, 0.9); 
+			
+  			font-family: "norman-variable",sans-serif;
+  			font-variation-settings: 'wght' 700;
+  			line-height: 1;
+  			margin: 0px;}
+  		p {z-index:100; color: #F1FF30; font-size: 6rem;
+  			text-shadow:0px 0px 10px rgba(241, 255, 48, 0.9),
+            0px 0px 30px rgba(241, 255, 48, 0.9); 
+  			line-height: 1;
+			font-family: "norman-variable",sans-serif;
+  			font-variation-settings: 'wght' 700;
+  			margin: 0px;
+  			}
+        .uni{display: inline-block; transform: rotate(180deg) scaleX(-1);
+            z-index: 100; color: #F1FF30; text-align: center; font-size: 6rem;
+            text-shadow:0px 0px 20px rgba(241, 255, 48, 0.9),
+            0px 0px 30px rgba(241, 255, 48, 0.9); 
+            }
+        .set{position: absolute; top: 46%; left: 30%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            align-items: center;
+            gap: -20px;
+            }
+
+  		.one{position: absolute; top: 26%; left: 70%;
+            transform: translateY(-50%);
+  			}
+  		.two{position: absolute; top: 46%; left: 70%;
+            transform: translateY(-50%);
+  			}
+  		.three{position: absolute; top: 66%; left: 70%;
+            transform: translateY(-50%);
+  			}
+
+  		.slide{flex: 0 0 100%;
+			display: flex;
+			position: relative;
+			align-items: center;
+			justify-content: center;
+			width: 100%;
+			height: 100vh;
+			overflow: hidden;
+			z-index: -100;}
+		.start{background:black;}
+		.bg {
+            position: absolute;       
+            top: 0;                   
+            left: 0;                  
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            z-index: -1;  
+           }
+
+	</style>
+</head>
+<body>
+	<video class="bg" id="bgVideo" autoplay loop muted><source src="ocean.mp4"></video>
+	<video class="bg" id="bgVideo2" autoplay loop muted><source src="wave.mp4"></video>
+	<video class="bg" id="bgVideo3" autoplay loop muted><source src="light.mp4"></video>
+	<div class="slide start"></div>
+    <div class="set">
+		<h1>To the ocean </h1>
+        <span class="uni">&#x224B;</span>
+    </div>
+		<p class="one" id="oceanBtn">one</p>
+		<audio id="oceanSnd" src="ocean.mp3" loop></audio>
+
+		<p class="two" id="waveBtn">two</p>
+		<audio id="waveSnd" src="wave.wav" loop></audio>
+
+		<p class="three" id="lightBtn">three</p>
+		<audio id="lightSnd" src="light.wav" loop></audio>
+        <audio id="lightSnd2" src="light2.wav" loop></audio>
+	
+<script>
+const oceanBtn = document.getElementById('oceanBtn');
+const waveBtn = document.getElementById('waveBtn');
+const lightBtn = document.getElementById('lightBtn');
+
+const bgVideo1 = document.getElementById('bgVideo');
+const bgVideo2 = document.getElementById('bgVideo2');
+const bgVideo3 = document.getElementById('bgVideo3');
+
+const oceanSnd = document.getElementById('oceanSnd');
+const waveSnd = document.getElementById('waveSnd');
+const lightSnd = document.getElementById('lightSnd');
+const lightSnd2 = document.getElementById('lightSnd2');
+
+let oceanPlayState = false;
+oceanBtn.onclick = function() {
+    if(!oceanPlayState){
+        bgVideo2.pause(); bgVideo2.style.opacity = 0;
+        waveSnd.pause(); wavePlayState = false;
+        waveBtn.style.color = '#F1FF30';
+
+        bgVideo3.pause(); bgVideo3.style.opacity = 0;
+        lightSnd.pause(); lightPlayState = false;
+        lightSnd2.pause(); lightPlayState = false;
+        lightBtn.style.color = '#F1FF30';
+
+        bgVideo1.style.opacity = 1;
+        bgVideo1.play();
+        oceanSnd.play();
+        oceanPlayState = true;
+        oceanBtn.style.color = 'transparent';
+    } else {
+        bgVideo1.pause();
+        oceanSnd.pause();
+        bgVideo1.style.opacity = 0;
+        oceanPlayState = false;
+        oceanBtn.style.color = '#F1FF30';
+    }
+}
+
+let wavePlayState = false;
+waveBtn.onclick = function() {
+    if(!wavePlayState){
+        bgVideo1.pause(); bgVideo1.style.opacity = 0;
+        oceanSnd.pause(); oceanPlayState = false;
+        oceanBtn.style.color = '#F1FF30';
+
+        bgVideo3.pause(); bgVideo3.style.opacity = 0;
+        lightSnd.pause(); lightPlayState = false;
+        lightSnd2.pause(); lightPlayState = false;
+        lightBtn.style.color = '#F1FF30';
+
+        bgVideo2.style.opacity = 1;
+        bgVideo2.play();
+        waveSnd.play();
+        wavePlayState = true;
+        waveBtn.style.color = 'transparent';
+    } else {
+        bgVideo2.pause();
+        waveSnd.pause();
+        bgVideo2.style.opacity = 0;
+        wavePlayState = false;
+        waveBtn.style.color = '#F1FF30';
+    }
+}
+
+let lightPlayState = false;
+lightBtn.onclick = function() {
+    if(!lightPlayState){
+        bgVideo1.pause(); bgVideo1.style.opacity = 0;
+        oceanSnd.pause(); oceanPlayState = false;
+        oceanBtn.style.color = '#F1FF30';
+
+        bgVideo2.pause(); bgVideo2.style.opacity = 0;
+        waveSnd.pause(); wavePlayState = false;
+        waveBtn.style.color = '#F1FF30';
+
+        bgVideo3.style.opacity = 1;
+        bgVideo3.play();
+        lightSnd.play();
+        lightSnd2.play();
+        lightPlayState = true;
+        lightBtn.style.color = 'transparent';
+    } else {
+        bgVideo3.pause();
+        lightSnd.pause();
+        lightSnd2.pause();
+        bgVideo3.style.opacity = 0;
+        lightPlayState = false;
+        lightBtn.style.color = '#F1FF30';
+    }
+}
+
+</script>
+
+
+</body>
+</html>
